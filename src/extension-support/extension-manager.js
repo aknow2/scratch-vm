@@ -250,7 +250,7 @@ class ExtensionManager {
         if (!/^[a-z0-9]+$/i.test(extensionInfo.id)) {
             throw new Error('Invalid extension id');
         }
-        this.externalExtensionMap.set(extensionInfo.id, this._getExtensionMenuItems);
+        this.externalExtensionMap.set(extensionInfo.id, this._tmpExternalExtensionURL);
         extensionInfo.name = extensionInfo.name || extensionInfo.id;
         extensionInfo.blocks = extensionInfo.blocks || [];
         extensionInfo.targetTypes = extensionInfo.targetTypes || [];
