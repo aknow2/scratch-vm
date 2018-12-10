@@ -86,6 +86,7 @@ class ExtensionManager {
          * @type {Array.<PendingExtensionWorker>}
          */
         this.pendingWorkers = [];
+        this.externalExtensionMap = new Map();
 
         /**
          * Set of loaded extension URLs/IDs (equivalent for built-in extensions).
@@ -100,7 +101,7 @@ class ExtensionManager {
          * @type {Runtime}
          */
         this.runtime = runtime;
-
+        this._tmpExternalExtensionURL = "";
         dispatch.setService('extensions', this).catch(e => {
             log.error(`ExtensionManager was unable to register extension service: ${JSON.stringify(e)}`);
         });
@@ -141,7 +142,7 @@ class ExtensionManager {
         return new Promise((resolve, reject) => {
             // If we `require` this at the global level it breaks non-webpack targets, including tests
             const ExtensionWorker = require('worker-loader?name=extension-worker.js!./extension-worker');
-
+            this._tmpExternalExtensionURL = extensionURL;
             this.pendingExtensions.push({extensionURL, resolve, reject});
             dispatch.addWorker(new ExtensionWorker());
         });
@@ -249,6 +250,7 @@ class ExtensionManager {
         if (!/^[a-z0-9]+$/i.test(extensionInfo.id)) {
             throw new Error('Invalid extension id');
         }
+        this.externalExtensionMap.set(extensionInfo.id, this._getExtensionMenuItems);
         extensionInfo.name = extensionInfo.name || extensionInfo.id;
         extensionInfo.blocks = extensionInfo.blocks || [];
         extensionInfo.targetTypes = extensionInfo.targetTypes || [];

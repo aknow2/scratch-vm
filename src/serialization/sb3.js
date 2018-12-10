@@ -1147,7 +1147,11 @@ const deserialize = function (json, runtime, zip, isSingleSprite) {
         .sort((a, b) => a.layerOrder - b.layerOrder);
 
     const monitorObjects = json.monitors || [];
-
+    if(json.extensionURLs) {
+       json.extensionURLs.forEach((item) => {
+        extensions.extensionURLs.set(item.key, item.url);
+       });
+    }
     return Promise.all(
         targetObjects.map(target =>
             parseScratchObject(target, runtime, extensions, zip))

@@ -404,7 +404,16 @@ class VirtualMachine extends EventEmitter {
      * @return {string} Serialized state of the runtime.
      */
     toJSON () {
-        return StringUtil.stringify(sb3.serialize(this.runtime));
+        const serializedObj = sb3.serialize(this.runtime);
+        const extensionURLs = [];
+        this.extensionManager.externalExtensionMap.forEach((url, key) => {
+            extensionURLs.push({
+                key,
+                url
+            });
+        });
+        serializedObj.extensionURLs = extensionURLs;
+        return StringUtil.stringify(serializedObj);
     }
 
     // TODO do we still need this function? Keeping it here so as not to introduce
