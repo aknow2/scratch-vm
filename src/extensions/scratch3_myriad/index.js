@@ -301,7 +301,7 @@ class MyriadApiBlocks {
     }
     getInfo() {
         return {
-            id: 'myriad',
+            id: 'myriadApiBlocks',
             name: 'Myriad Scratch blocks',
             docsURI: '',
             blocks: [
@@ -362,7 +362,7 @@ class MyriadApiBlocks {
                 },
                 {
                     opcode: 'getGyroscope',
-                    blockType: Scratch.BlockType.REPORTER,
+                    blockType: 'reporter',
                     branchCount: 0,
                     isTerminal: true,
                     blockAllThreads: false,
@@ -378,7 +378,7 @@ class MyriadApiBlocks {
                 },
                 {
                     opcode: 'getAccelerometer',
-                    blockType: Scratch.BlockType.REPORTER,
+                    blockType: 'reporter',
                     branchCount: 0,
                     isTerminal: true,
                     blockAllThreads: false,
@@ -394,7 +394,7 @@ class MyriadApiBlocks {
                 },
                 {
                     opcode: 'getMagnetometer',
-                    blockType: Scratch.BlockType.REPORTER,
+                    blockType: 'reporter',
                     branchCount: 0,
                     isTerminal: true,
                     blockAllThreads: false,
@@ -410,7 +410,7 @@ class MyriadApiBlocks {
                 },
                 {
                     opcode: 'getProximity',
-                    blockType: Scratch.BlockType.REPORTER,
+                    blockType: 'reporter',
                     branchCount: 0,
                     isTerminal: true,
                     blockAllThreads: false,
@@ -426,7 +426,7 @@ class MyriadApiBlocks {
                 },
                 {
                     opcode: 'getLight',
-                    blockType: Scratch.BlockType.REPORTER,
+                    blockType: 'reporter',
                     branchCount: 0,
                     isTerminal: true,
                     blockAllThreads: false,
