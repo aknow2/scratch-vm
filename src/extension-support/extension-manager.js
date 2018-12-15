@@ -1,6 +1,8 @@
 const dispatch = require('../dispatch/central-dispatch');
 const log = require('../util/log');
 const maybeFormatMessage = require('../util/maybe-format-message');
+const extensionTranslator = require('./extension-translator');
+const formatMessage = require('format-message');
 
 const BlockType = require('./block-type');
 
@@ -221,6 +223,8 @@ class ExtensionManager {
      * @private
      */
     _registerExtensionInfo (serviceName, extensionInfo) {
+        const locale = formatMessage.setup().locale;
+        extensionInfo = extensionTranslator(extensionInfo, locale);
         extensionInfo = this._prepareExtensionInfo(serviceName, extensionInfo);
         dispatch.call('runtime', '_registerExtensionPrimitives', extensionInfo).catch(e => {
             log.error(`Failed to register primitives for extension on service ${serviceName}:`, e);
